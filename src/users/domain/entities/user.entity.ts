@@ -16,10 +16,12 @@ export class UserEntity extends Entity<UserProps> {
     this.props.createdAt = this.props.createdAt ?? new Date();
   }
 
+  //* método de atualização do nome
   update(value: string): void {
     this.name = value;
   }
 
+  //* método de atualização da senha
   updatePassword(value: string): void {
     this.password = value;
   }
