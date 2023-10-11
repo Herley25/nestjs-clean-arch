@@ -1,5 +1,6 @@
 import { Entity } from '@/shared/domain/entities/entity';
 import { UserValidatorFactory } from '../validators/user.validator';
+import { EntityValidationError } from '../errors/validation-error';
 
 export type UserProps = {
   name: string;
@@ -26,6 +27,7 @@ export class UserEntity extends Entity<UserProps> {
 
   //* método de atualização da senha
   updatePassword(value: string): void {
+    UserEntity.validate({ ...this.props, password: value });
     this.password = value;
   }
 
@@ -53,9 +55,12 @@ export class UserEntity extends Entity<UserProps> {
     return this.props.createdAt;
   }
 
-  //* está recendo a instância do validador e executando o método de validação
+  //* está recebendo a instância do validador e executando o método de validação
   static validate(props: UserProps) {
     const validator = UserValidatorFactory.create();
-    validator.validate(props);
+    const isValid = validator.validate(props);
+    if (!isValid) {
+      throw new EntityValidationError(validator.errors);
+    }
   }
 }
