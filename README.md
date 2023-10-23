@@ -68,6 +68,11 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
 
+## Library utilized in project
+
+# library for facilitate password encription
+- bvrypt.js -[https://github.com/dcodeIO/bcrypt.js/blob/master/README.md]
+
 ## License
 
 Nest is [MIT licensed](LICENSE).
