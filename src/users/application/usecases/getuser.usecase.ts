@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 //* abordado o conceito do solid, responsabilidade única
 import { UserRepository } from '@/users/domain/repositories/user.repository';
+import { UserOutput } from '../dtos/user-output';
 
 // Caso de uso para exibir os dados de um usuário
 export namespace GetUserUseCase {
@@ -8,13 +9,7 @@ export namespace GetUserUseCase {
     id: string;
   };
 
-  export type Output = {
-    id: string;
-    name: string;
-    email: string;
-    password: string;
-    createdAt: Date;
-  };
+  export type Output = UserOutput;
 
   //Criação do método
   export class UseCase {
