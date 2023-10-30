@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { SignupUseCase } from '../application/usecases/signup.usecase';
 import { UserInMemoryRepository } from './database/in-memory/repositories/user-in-memory.repository';
@@ -17,7 +16,6 @@ import { DeleteUserUseCase } from '../application/usecases/delete-user.usecase';
   controllers: [UsersController],
   // Antes de registrar as classes, tem que registrar as dependências
   providers: [
-    UsersService,
     // implementação de recursos terceiros, pode haver possíveis mudanças
     {
       provide: 'UserRepository',
