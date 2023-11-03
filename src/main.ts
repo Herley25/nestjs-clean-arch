@@ -13,3 +13,6 @@ async function bootstrap() {
   await app.listen(3000, '0.0.0.0');
 }
 bootstrap();
+
+// sudo snap refresh docker --channel=latest/edge
+// comando para correção de problema com docker ao utilizar uma versão mais recente
