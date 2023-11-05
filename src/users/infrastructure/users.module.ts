@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { SignupUseCase } from '../application/usecases/signup.usecase';
-import { UserInMemoryRepository } from './database/in-memory/repositories/user-in-memory.repository';
 import { BcryptjsHashProvider } from './providers/hash-provider/bcriptjs-hash.provider';
 import { UserRepository } from '../domain/repositories/user.repository';
 import { HashProvider } from '@/shared/application/providers/hash-provider';
@@ -11,15 +10,24 @@ import { ListUsersUseCase } from '../application/usecases/listusers.usecase';
 import { UpdateUserUseCase } from '../application/usecases/update-user.usecase';
 import { UpdatePasswordUseCase } from '../application/usecases/update-password.usecase.ts';
 import { DeleteUserUseCase } from '../application/usecases/delete-user.usecase';
+import { PrismaService } from '@/shared/infrastructure/database/prisma/prisma.service';
+import { UserPrismaRepository } from './database/in-memory/repositories/prisma/repositories/user-prisma.repository';
 
 @Module({
   controllers: [UsersController],
   // Antes de registrar as classes, tem que registrar as dependências
   providers: [
+    {
+      provide: 'PrismaService',
+      useClass: PrismaService,
+    },
     // implementação de recursos terceiros, pode haver possíveis mudanças
     {
       provide: 'UserRepository',
-      useClass: UserInMemoryRepository,
+      useFactory: (prismaService: PrismaService) => {
+        return new UserPrismaRepository(prismaService);
+      },
+      inject: ['PrismaService'],
     },
     {
       provide: 'HashProvider',
