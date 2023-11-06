@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NotFoundError } from '@/shared/domain/errors/not-found-error';
 import { PrismaService } from '@/shared/infrastructure/database/prisma/prisma.service';
 import { UserEntity } from '@/users/domain/entities/user.entity';
